@@ -37,8 +37,7 @@ function App() {
 
   useInterval(() => {
     setCurrentDate(new Date());
-
-    if (currentHour < 9 || currentHour > 16) {
+    if (currentHour < 9 || currentHour >= 16) {
       setNextPausa('9:00');
       nextBreakDate.setDate(nextBreakDate.getDate() + 1);
       nextBreakDate.setHours(9);
@@ -50,15 +49,18 @@ function App() {
       setNextPausa('16:00');
     }
 
+
+
     nextBreakDate.setMinutes(0);
     nextBreakDate.setSeconds(0);
     nextBreakDate.setMilliseconds(0);
 
 
-    const timeDiff = Math.floor((nextBreakDate.getTime() - currentDate.getTime()) / 1000);
+    const timeDiff = ((nextBreakDate - currentDate)) / 1000;
     const hours = Math.floor(timeDiff / 3600);
     const minutes = Math.floor((timeDiff - (hours * 3600)) / 60);
     const seconds = Math.floor(timeDiff - (hours * 3600) - (minutes * 60));
+
 
     setHoursDiff(padding(hours));
     setMinutesDiff(padding(minutes));
