@@ -37,7 +37,7 @@ function App() {
 
   useInterval(() => {
     setCurrentDate(new Date());
-    if (currentHour < 9 || currentHour >= 16) {
+    if (currentHour >= 16) {
       setNextPausa('9:00');
       nextBreakDate.setDate(nextBreakDate.getDate() + 1);
       nextBreakDate.setHours(9);
@@ -47,6 +47,9 @@ function App() {
     } else if (currentHour >= 11 && currentHour < 16) {
       nextBreakDate.setHours(16);
       setNextPausa('16:00');
+    } else {
+      setNextPausa('9:00');
+      nextBreakDate.setHours(9);
     }
 
     nextBreakDate.setMinutes(0);
